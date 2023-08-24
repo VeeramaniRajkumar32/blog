@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>😎</title>
+  <!-- Favicon -->
+  <link href="../public/img/brand/favicon.png" rel="icon" type="image/png">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+  <!-- Icons -->
+  <link href="../public/vendor/nucleo/css/nucleo.css" rel="stylesheet">
+  <link href="../public/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <!-- Argon CSS -->
+  <link type="text/css" href="../public/css/argon.css?v=1.0.0" rel="stylesheet">
+</head>
+
+<body>
+  <!-- Sidenav -->
+  <%- // include('../views/partials/sidebar') %>
+  <!-- Main content -->
+  <div class="main-content">
+    <!-- Top navbar -->
+    <%- include('../views/partials/navbar') %>
+    <%-// include('../views/partials/header.ejs') %>
+    <!-- Header -->
+    <div class="header bg-gradient-primary pb-8 pt-5 pt-lg-8 d-flex align-items-center">
+      <!-- Header container -->
+      <div class="container-fluid">
+        <div class="row justify-content-center">
+          <div class="col-lg-6 col-md-10 text-center">
+            <h1 class="display-2 text-white">
+              <% if(data.name != "undefined" && data.name != " "){ %>
+                <%= data.name %>
+                <%  }else{
+
+                } %>
+            </h1>
+            <!-- <p class="text-white mt-0 mb-5">We are constantly doing updates on the product and documentation, so please check the online version.</p> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Page content -->
+    <div class="container-fluid mt--7">
+      <div class="row justify-content-center">
+        <div class="col-lg-10">
+          <div class="card p-5">
+            <div class="mume markdown-preview">
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Footer -->
+     <%- include('../views/partials/footer')%>
+  </div>
+</div>
+<!-- Include scripts -->
+<%- include('../views/partials/scripts')%>
+  <!-- Argon Scripts -->
+  <!-- Core -->
+  <!-- <script src="../public/vendor/jquery/dist/jquery.min.js"></script>
+  <script src="../public/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script> -->
+  <!-- Argon JS -->
+  <!-- <script src="../public/js/argon.js?v=1.0.0"></script> -->
+</body>
+
+</html>

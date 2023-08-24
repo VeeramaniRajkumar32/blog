@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>Veera</title>
+  <!-- Favicon -->
+  <link href="../public/img/brand/favicon.png" rel="icon" type="image/png" />
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+  <!-- Icons -->
+  <link href="../public/vendor/nucleo/css/nucleo.css" rel="stylesheet" />
+  <link href="../public/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
+  <!-- Argon CSS -->
+  <link type="text/css" href="../public/css/argon.css?v=1.0.0" rel="stylesheet" />
+</head>
+
+<body>
+  <!-- Sidenav -->
+  <%- // include('./sideNav.ejs') %> <%- include('../partials/sidebar.ejs') %>
+      <!-- Main content -->
+      <div class="main-content">
+        <!-- Top navbar -->
+        <%- // include('./header.ejs') %> 
+        <%- include('../partials/navbar.ejs') %>
+            <!-- Header -->
+            <%- // include('../partials/header.ejs') %>
+              <div class="header bg-gradient-primary pb-8 pt-5 pt-lg-8 d-flex align-items-center">
+                <!-- Header container -->
+                <div class="container-fluid">
+                  <div class="row justify-content-center">
+                    <div class="col-lg-6 col-md-10 text-center">
+                      <h1 class="display-2 text-white">POST</h1>
+                      <!-- <p class="text-white mt-0 mb-5">We are constantly doing updates on the product and documentation, so please check the online version.</p> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Page content -->
+              <div class="container-fluid mt--7">
+                <div class="row mt-3 justify-content-center">
+                  <div class="col">
+                    <div class="card bg-default shadow">
+                      <div class="card-header bg-transparent border-0">
+                        <div class="row">
+                          <h3 class="text-white col-sm-11">All Post</h3>
+                          <button type="button" class="btn btn-primary col-sm-1" data-toggle="modal"
+                            data-target="#myModal">
+                            Add
+                          </button>
+                        </div>
+                        <div class="modal fade" id="myModal">
+                          <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                              <div class="card bg-secondary shadow border-0">
+                                <div class="card-header bg-transparent row p-3">
+                                  <h4 class="modal-title col-sm-10">Add Post</h4>
+                                  <button type="button" class="close col-sm-2" data-dismiss="modal">
+                                    &times;
+                                  </button>
+                                </div>
+                                <div class="card-body px-lg-4 py-lg-4">
+                                  <form class="row" role="form" action="/post/create" enctype="multipart/form-data" method="POST">
+                                    <div class="form-group col-sm-12">
+                                      <div class="input-group input-group-alternative">
+                                        <input class="form-control" placeholder="Title" type="text" name="title" required />
+                                      </div>
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                      <div class="input-group input-group-alternative">
+                                        <select class="form-control" name="category" required>
+                                          <option disabled selected value=""> Select Category </option>
+                                          <% category.forEach((item) => { %>
+                                          <option value="<%= item.name %>"><%= item.name %></option>
+                                          <% }) %>
+                                        </select>
+                                      </div>
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                      <div class="input-group input-group-alternative">
+                                        <input class="form-control" type="file" name="image" required />
+                                      </div>
+                                    </div>
+                                    <div class="form-group col-sm-12">
+                                      <div class="input-group input-group-alternative">
+                                        <textarea class="form-control" placeholder="Description" rows="3" name="description" ></textarea>
+                                      </div>
+                                    </div>
+                                    <div class="col-sm-12 text-right">
+                                      <button type="submit" class="btn btn-primary my-4">
+                                        Submit
+                                      </button>
+                                    </div>
+                                  </form>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="table-responsive">
+                        <table class="table align-items-center table-dark" id="example">
+                          <thead class="thead-dark">
+                            <th class="text-center" scope="col">#</th>
+                            <th class="text-center" scope="col">Title</th>
+                            <th class="text-center" scope="col">Image</th>
+                            <th class="text-center" scope="col">Category</th>
+                            <th class="text-center" scope="col">Description</th>
+                            <th class="text-center" scope="col">Action</th>
+                          </thead>
+                          <tbody>
+                            <% if (post.length > 0) { %>
+                              <% post.forEach((item,index)=> { %>
+                              <tr>
+                                  <td class="text-center"><%= ++index %></td>
+                                  <td class="text-center"><%= item.title %></td>
+                                  <td class="text-center"><%= %></td>
+                                  <td class="text-center"><%= %></td>
+                                  <td class="text-center"><%= (JSON.stringify(new Date(item.createdAt))).slice(1,11) %></td>
+                                  <td class="text-center">
+                                      <a href="category/<%= item._id%>" class="btn btn-outline-success">Edit</a>
+                                      <form action="category/delete/<%= item._id%>" method="post">
+                                          <button type="submit" onclick="alert(`Are you sure delete the category - <%= item.name %>`)" class="btn btn-outline-danger">Delete</button>
+                                      </form>
+                                  </td>
+                              </tr>
+                              <%  }) %>
+                          <% } else { %>
+                              <h1>No POST Found!</h1>
+                          <% } %>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Footer -->
+                <%- include('../partials/footer.ejs')%>
+              </div>
+          </div>
+      <%- include('../partials/scripts.ejs')%>
+</body>
+
+</html>
